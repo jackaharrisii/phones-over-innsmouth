@@ -1,0 +1,15 @@
+<h2>Product Details</h2>
+
+<div *ngIf="product; then details else notAProduct"></div>
+
+<ng-template #details>
+  <h3>{{ product.name }}</h3>
+  <h4>{{ product.price | currency }}</h4>
+  <p>{{ product.description }}</p>
+  <button (click)="addToCart(product)">Buy</button>
+</ng-template>
+  
+<ng-template #notAProduct>
+  Product not found <br>
+  [insert image of Cthulhu destroying something or comically looking for something with question marks over his head]\n
+</ng-template>
