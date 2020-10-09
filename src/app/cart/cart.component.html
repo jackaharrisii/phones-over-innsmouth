@@ -1,0 +1,65 @@
+<h3>Cart</h3>
+
+<p>
+	<a routerLink=\"/shipping\">Shipping Prices</a>
+</p>
+
+<p>Cart</p>
+
+<div class="cart-item" *ngFor="let item of items">
+	<span>{{ item.name }}</span>
+	<span>{{ item.price | currency }}</span>
+</div>
+
+<p>
+	Billing Info
+</p>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+	<div>
+		<label for="name">
+			Name
+		</label>
+		<input id="name" type="text" formControlName="name">
+	</div>
+	<div>
+		<label for="card">
+			Fake Credit Card
+		</label>
+		<input id="card" type="text" formControlName="card" required maxlength="4">
+	</div>
+	<div>
+		<label for="address">
+			Address
+		</label>
+		<input id="address" type="text" formControlName="address">
+	</div>
+	<div class="shipping-item" *ngFor="let shipping of shippingCosts | async">
+		<span>{{ shipping.type }}</span>
+		<span>{{ shipping.price | currency }}</span>
+	</div>
+	<div>
+		<label for="shipping">
+			Shipping Speed
+		</label>
+		<!-- Trying to get this to populate from the json, but no luck yet
+		<select ng-model="shippinglist"
+			ng-options="shipping.type for shipping in shippingList">
+			<option value="">Select Shipping Speed</option>
+		</select> -->
+		<select formControlName="shipping" class="form-control">
+			<option disabled>Select Shipping Speed</option>
+			<option>Pick a Shipping Method</option>
+			<option *ngFor="let ship of shippingList">{{ship}}</option>
+		</select>
+	</div><br>
+	
+	<div>
+		<label for="total">
+			Order Total: [TO DO]
+		</label>
+	</div>
+	
+	<button class="button" type="submit">Purchase</button>
+	
+</form>
