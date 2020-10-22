@@ -34,7 +34,7 @@
 		</label>
 		<input id="address" type="text" formControlName="address">
 	</div>
-	<div class="shipping-item" *ngFor="let shipping of shippingCosts | async">
+	<div class="shipping-item" *ngFor="let shipping of shippingList | async">
 		<span>{{ shipping.type }}</span>
 		<span>{{ shipping.price | currency }}</span>
 	</div>
